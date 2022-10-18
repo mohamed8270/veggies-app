@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:spicesapp/screens/home.dart';
-
 import 'loginpage.dart';
+import 'mainapp.dart';
 
 class AuthService {
   // handleAuthState()
@@ -12,19 +11,20 @@ class AuthService {
 
   handleAuthState() {
     return StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (BuildContext context, snapshot) {
-          if (snapshot.hasData) {
-            return Home();
-          } else {
-            return const LoginPage();
-          }
-        });
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (BuildContext context, snapshot) {
+        if (snapshot.hasData) {
+          return MainApp();
+        } else {
+          return const LoginPage();
+        }
+      },
+    );
   }
 
   signInWithGoogle() async {
     final GoogleSignInAccount? googleUser =
-        await GoogleSignIn(scopes: <String>["Email"]).signIn();
+        await GoogleSignIn(scopes: <String>["email"]).signIn();
 
     final GoogleSignInAuthentication googleAuth =
         await googleUser!.authentication;

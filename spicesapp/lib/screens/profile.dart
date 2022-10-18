@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:spicesapp/mainapp.dart';
 import 'package:spicesapp/theme.dart';
 
 class Profile extends StatelessWidget {
@@ -13,7 +14,14 @@ class Profile extends StatelessWidget {
         elevation: 0,
         backgroundColor: KWhiteColor,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MainApp(),
+              ),
+            );
+          },
           icon: SvgPicture.asset(
             'assets/icons/back.svg',
             color: KPrimaryColor,

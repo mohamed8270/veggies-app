@@ -87,7 +87,7 @@ class Discards extends StatelessWidget {
                 height: 30,
                 width: 100,
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: Colors.green,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(

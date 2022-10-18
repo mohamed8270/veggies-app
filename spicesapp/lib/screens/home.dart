@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:spicesapp/cards/productshow.dart';
+import 'package:spicesapp/navigation.dart';
+import 'package:spicesapp/screens/notification.dart';
 import 'package:spicesapp/theme.dart';
-
 import '../cards/cards.dart';
 
 class Home extends StatelessWidget {
@@ -11,16 +12,24 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavBar(),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: KWhiteColor,
         elevation: 0,
-        leading: IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(
-            'assets/icons/menu.svg',
-            color: KPrimaryColor,
-          ),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              icon: SvgPicture.asset(
+                'assets/icons/menu.svg',
+                color: KPrimaryColor,
+              ),
+            );
+          },
         ),
         title: Column(
           children: [
@@ -44,7 +53,14 @@ class Home extends StatelessWidget {
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NotifyScreen(),
+                ),
+              );
+            },
             child: SvgPicture.asset(
               'assets/icons/notification.svg',
               color: KPrimaryColor,
@@ -100,7 +116,7 @@ class Home extends StatelessWidget {
                         width: 150,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: KWhiteColor,
+                          color: Colors.green,
                         ),
                         alignment: Alignment.center,
                         child: Text(
@@ -177,12 +193,22 @@ class Home extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Cards(
-                      image: 'assets/images/tomato.jpg',
-                      price: '\u{20B9}${35}',
-                      title: 'Country Tomato',
-                      grm: '500g',
-                      rprc: '\u{20B9}${30}',
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductCard(),
+                          ),
+                        );
+                      },
+                      child: Cards(
+                        image: 'assets/images/tomato.jpg',
+                        price: '\u{20B9}${35}',
+                        title: 'Country Tomato',
+                        grm: '500g',
+                        rprc: '\u{20B9}${30}',
+                      ),
                     ),
                     SizedBox(width: 15),
                     Cards(
@@ -208,7 +234,7 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Explore Items',
+                    'Fruits',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w800,
@@ -226,44 +252,105 @@ class Home extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 15),
-              Column(
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Cards(
+                      image: 'assets/images/fruits/apple.jpeg',
+                      title: 'Fresh Apples',
+                      price: '100',
+                      grm: '1Kg',
+                      rprc: '\u{20B9}${90}',
+                    ),
+                    SizedBox(width: 15),
+                    Cards(
+                      image: 'assets/images/fruits/banana.jpeg',
+                      title: 'Fresh Apples',
+                      price: '100',
+                      grm: '1Kg',
+                      rprc: '\u{20B9}${90}',
+                    ),
+                    SizedBox(width: 15),
+                    Cards(
+                      image: 'assets/images/fruits/grapes.jpg',
+                      title: 'Fresh Apples',
+                      price: '100',
+                      grm: '1Kg',
+                      rprc: '\u{20B9}${90}',
+                    ),
+                    SizedBox(width: 15),
+                    Cards(
+                      image: 'assets/images/fruits/pomegranates.jpg',
+                      title: 'Fresh Apples',
+                      price: '100',
+                      grm: '1Kg',
+                      rprc: '\u{20B9}${90}',
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(top: 10),
-                        alignment: Alignment.topCenter,
-                        height: 150,
-                        width: 180,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.black12,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Fruits & Vegetables',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w800,
-                                color: KPrimaryColor,
-                              ),
-                            ),
-                            Image(
-                              alignment: Alignment.center,
-                              image:
-                                  AssetImage('assets/images/friutsandveg.png'),
-                              height: 120,
-                              width: 120,
-                              fit: BoxFit.scaleDown,
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                  Text(
+                    'Meat',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: KPrimaryColor,
+                    ),
+                  ),
+                  Text(
+                    'See all',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      color: KPrimaryColor.withOpacity(0.5),
+                    ),
                   )
                 ],
+              ),
+              SizedBox(height: 15),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Cards(
+                      image: 'assets/images/meat/chicken.jpeg',
+                      title: 'Chicken',
+                      price: '200',
+                      grm: '1Kg',
+                      rprc: '\u{20B9}${180}',
+                    ),
+                    SizedBox(width: 15),
+                    Cards(
+                      image: 'assets/images/meat/goat.jpg',
+                      title: 'Goat',
+                      price: '200',
+                      grm: '1Kg',
+                      rprc: '\u{20B9}${180}',
+                    ),
+                    SizedBox(width: 15),
+                    Cards(
+                      image: 'assets/images/meat/fish.jpg',
+                      title: 'Fish',
+                      price: '200',
+                      grm: '1Kg',
+                      rprc: '\u{20B9}${180}',
+                    ),
+                    SizedBox(width: 15),
+                    Cards(
+                      image: 'assets/images/meat/beef.jpg',
+                      title: 'Beef',
+                      price: '200',
+                      grm: '1Kg',
+                      rprc: '\u{20B9}${180}',
+                    ),
+                    SizedBox(width: 15),
+                  ],
+                ),
               )
             ],
           ),

@@ -6,7 +6,7 @@ class Liked extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Liked')),
+      body: Center(child: Text('Nothing to show')),
     );
   }
 }

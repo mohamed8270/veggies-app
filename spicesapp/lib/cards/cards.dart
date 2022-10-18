@@ -26,7 +26,7 @@ class Cards extends StatelessWidget {
           height: 160,
           width: 120,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(10),
             color: KPrimaryColor,
             image: DecorationImage(
               image: AssetImage(image),
@@ -86,7 +86,7 @@ class Cards extends StatelessWidget {
               width: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: Colors.red,
+                color: Colors.green,
               ),
               child: Text(
                 'Add',
